@@ -87,7 +87,7 @@ class PyramidResourceTestCase(unittest.TestCase):
         resp = self.res.handle('list')
         self.assertEqual(resp.content_type, 'application/json')
         self.assertEqual(resp.status_code, 401)
-        self.assertEqual(resp.body.decode('utf-8'), '{"error": "Unauthorized."}')
+        self.assertEqual(resp.body.decode('utf-8'), '{"error": {"msg": "Unauthorized."}}')
 
     def test_add_views(self):
         config = PyrTestResource.add_views(self.config, '/users/')

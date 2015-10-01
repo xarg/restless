@@ -208,8 +208,12 @@ class Resource(object):
         :returns: A response object
         """
         data = {
-            'error': six.text_type(err),
+            'error': {
+                'msg': six.text_type(err),
+            }
         }
+        if hasattr(err, 'data'):
+            data['error']['data'] = err['data']
 
         if self.is_debug():
             # Add the traceback.

@@ -94,7 +94,7 @@ class ResourceTestCase(unittest.TestCase):
         err = HttpError("Whoopsie")
         resp = self.res.build_error(err)
         resp_body = json.loads(resp.body)
-        self.assertEqual(resp_body, {'error': 'Whoopsie'})
+        self.assertEqual(resp_body, {'error': {'msg': 'Whoopsie'}})
         self.assertEqual(resp.content_type, 'application/json')
         self.assertEqual(resp.status_code, 500)
 
@@ -102,7 +102,7 @@ class ResourceTestCase(unittest.TestCase):
         resp = self.res.build_error(nf_err)
         resp_body = json.loads(resp.body)
         # Default error message.
-        self.assertEqual(resp_body, {'error': 'Resource not found.'})
+        self.assertEqual(resp_body, {'error': {'msg': 'Resource not found.'}})
         self.assertEqual(resp.content_type, 'application/json')
         # Custom status code.
         self.assertEqual(resp.status_code, 404)
@@ -112,7 +112,7 @@ class ResourceTestCase(unittest.TestCase):
         resp = self.res.build_error(unknown_err)
         resp_body = json.loads(resp.body)
         # Still gets the JSON treatment & an appropriate status code.
-        self.assertEqual(resp_body, {'error': "'something' not found on the object."})
+        self.assertEqual(resp_body, {'error': {'msg': "'something' not found on the object."}})
         self.assertEqual(resp.content_type, 'application/json')
         self.assertEqual(resp.status_code, 500)
 
