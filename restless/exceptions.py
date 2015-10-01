@@ -27,9 +27,10 @@ class HttpError(RestlessError):
     status = APPLICATION_ERROR
     msg = "Application Error"
 
-    def __init__(self, msg=None):
+    def __init__(self, msg=None, data=None):
         if not msg:
             msg = self.__class__.msg
+        self.data = data
 
         super(HttpError, self).__init__(msg)
 

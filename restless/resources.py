@@ -212,8 +212,8 @@ class Resource(object):
                 'msg': six.text_type(err),
             }
         }
-        if hasattr(err, 'data'):
-            data['error']['data'] = err['data']
+        if hasattr(err, 'data') and err.data is not None:
+            data['error']['data'] = err.data
 
         if self.is_debug():
             # Add the traceback.
